@@ -1,2 +1,2 @@
-# sales_app_api
-Sales app
+# Sales App API
+Sales app api
