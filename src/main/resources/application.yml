@@ -7,12 +7,17 @@ spring:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
   datasource:
     url: jdbc:mysql://localhost:3306/sales_app?useSSL=false
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+    time-zone: UTC
+
 server:
   port: 9090
 
@@ -21,3 +26,13 @@ springfox:
     swagger:
       v2:
         path: /swagger.json
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+
+app:
+  jwtSecret: .supersecret2019
+  jwtExpirationInMs: 604800000

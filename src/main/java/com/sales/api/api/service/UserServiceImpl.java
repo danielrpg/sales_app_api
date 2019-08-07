@@ -1,7 +1,5 @@
 package com.sales.api.api.service;
 
-import com.sales.api.api.domain.User;
-import com.sales.api.api.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

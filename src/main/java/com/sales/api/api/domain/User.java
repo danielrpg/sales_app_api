@@ -1,27 +1,77 @@
 package com.sales.api.api.domain;
 
-import io.swagger.annotations.ApiModel;
+import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "users")
-@ApiModel(description = "This is a user table w")
-public class User implements Serializable {
+@Table(name = "users", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {
+                "username"
+        }),
+        @UniqueConstraint(columnNames = {
+                "email"
+        })
+})
+public class User extends DateAudit {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotBlank
+    @Size(max = 40)
+    private String name;
+
+    @NotBlank
+    @Size(max = 50)
     private String username;
+
+    @NaturalId
+    @NotBlank
+    @Size(max = 100)
+    @Email
     private String email;
+
+    @NotBlank
+    @Size(max = 100)
     private String password;
-    private String role;
-    private String firstName;
-    private String lastName;
-    private Boolean isActive;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_roles",
+               joinColumns = @JoinColumn(name = "user_id"),
+               inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     public User() {
-        role = "USER";
+
+    }
+
+    public User(String name, String username, String email, String password) {
+        this.name = name;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getUsername() {
@@ -32,6 +82,14 @@ public class User implements Serializable {
         this.username = username;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -40,51 +98,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public String getRole() {
-        return role;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getEmail () {
-        return email;
-    }
-
-    public void setEmail (String email) {
-        this.email = email;
-    }
-
-    public String getFirstName () {
-        return firstName;
-    }
-
-    public void setFirstName (String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName () {
-        return lastName;
-    }
-
-    public void setLastName (String lastName) {
-        this.lastName = lastName;
-    }
-
-    public Boolean getActive () {
-        return isActive;
-    }
-
-    public void setActive (Boolean active) {
-        isActive = active;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

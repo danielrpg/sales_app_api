@@ -1,7 +1,6 @@
 package com.sales.api.api.service;
 
 import com.sales.api.api.domain.Product;
-import com.sales.api.api.exception.ResourceNotFoundException;
 import com.sales.api.api.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
