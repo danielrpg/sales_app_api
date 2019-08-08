@@ -1,7 +1,7 @@
 package com.sales.api.api.security;
 
-import com.api.songo.api.domain.User;
-import com.api.songo.api.repository.UserRepository;
+import com.sales.api.api.domain.User;
+import com.sales.api.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

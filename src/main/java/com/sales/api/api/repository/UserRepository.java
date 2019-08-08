@@ -1,6 +1,7 @@
 package com.sales.api.api.repository;
 
-import com.api.songo.api.domain.User;
+
+import com.sales.api.api.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
